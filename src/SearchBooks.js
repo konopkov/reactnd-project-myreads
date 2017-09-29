@@ -10,7 +10,7 @@ class SearchBooks extends Component {
     constructor() {
         super();
         this.state = {
-            books: []
+            searchResults: [],
         };
 
         this.searchBooks = this.searchBooks.bind(this);
@@ -18,11 +18,19 @@ class SearchBooks extends Component {
 
     searchBooks(e) {
         e.preventDefault();
+
         const values = serializeForm(e.target, {hash: true});
-        console.log(values.query);
-        BooksAPI.search(values.query, 20).then((books) => {
-            console.log(books);
-            this.setState({books})
+        const myBooks = this.props.myBooks;
+        let findBook = (book, myBooks) => {
+
+            myBooks.find((bookToFind) => bookToFind.id === book.id)
+        };
+
+        BooksAPI.search(values.query, 20).then((searchResults) => {
+
+            searchResults.map(book => findBook(book, myBooks) ? book.shelf = findBook(book, myBooks).shelf : book.shelf = 'none');
+            this.setState({searchResults})
+
         })
     }
 
@@ -47,7 +55,7 @@ class SearchBooks extends Component {
                     </form>
                 </div>
                 <div className="search-books-results">
-                    <BooksGrid books={this.state.books} onHandleChange={this.props.onHandleChange}/>
+                    <BooksGrid books={this.state.searchResults} onHandleChange={this.props.onHandleChange}/>
                 </div>
             </div>
         )

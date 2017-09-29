@@ -46,7 +46,7 @@ class BooksApp extends React.Component {
                 <Route
                     path='/search'
                     render={({history}) => (
-                        <SearchBooks onHandleChange={this.handleChange}/>
+                        <SearchBooks myBooks={this.state.books} onHandleChange={this.handleChange}/>
                     )}
                 />
 
