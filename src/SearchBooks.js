@@ -10,7 +10,7 @@ class SearchBooks extends Component {
     constructor() {
         super();
         this.state = {
-            books: [],
+            books: []
         };
 
         this.searchBooks = this.searchBooks.bind(this);
@@ -47,7 +47,7 @@ class SearchBooks extends Component {
                     </form>
                 </div>
                 <div className="search-books-results">
-                    <BooksGrid books={this.state.books}/>
+                    <BooksGrid books={this.state.books} onHandleChange={this.props.onHandleChange}/>
                 </div>
             </div>
         )

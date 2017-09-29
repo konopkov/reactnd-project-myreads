@@ -11,7 +11,7 @@ class BookShelf extends Component {
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{this.props.shelfName}</h2>
                 <div className="bookshelf-books">
-                    <BooksGrid books={books}/>
+                    <BooksGrid books={books} onHandleChange={this.props.onHandleChange}/>
                 </div>
             </div>
         )

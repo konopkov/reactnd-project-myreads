@@ -3,11 +3,12 @@ import {Link} from 'react-router-dom';
 import BookShelf from './BookShelf'
 
 class ListBooks extends Component {
-    render(){
+
+    render() {
 
         const books = this.props.books;
 
-        return(
+        return (
             <div className="list-books">
                 <div className="list-books-title">
                     <h1>MyReads</h1>
@@ -15,12 +16,15 @@ class ListBooks extends Component {
                 <div className="list-books-content">
                     <div>
                         <BookShelf shelfName='Currently Reading'
+                                   onHandleChange={this.props.onHandleChange}
                                    books={books.filter((book) => book.shelf === 'currentlyReading')}
                         />
                         <BookShelf shelfName='Want to Read'
+                                   onHandleChange={this.props.onHandleChange}
                                    books={books.filter((book) => book.shelf === 'wantToRead')}
                         />
                         <BookShelf shelfName='Read'
+                                   onHandleChange={this.props.onHandleChange}
                                    books={books.filter((book) => book.shelf === 'read')}
                         />
                     </div>
