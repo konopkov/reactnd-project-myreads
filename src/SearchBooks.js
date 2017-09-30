@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import * as BooksAPI from './BooksAPI'
-import serializeForm from 'form-serialize'
 import BooksGrid from "./BooksGrid";
 
 
@@ -19,19 +18,30 @@ class SearchBooks extends Component {
     searchBooks(e) {
         e.preventDefault();
 
-        const values = serializeForm(e.target, {hash: true});
+        const query = e.target.value;
         const myBooks = this.props.myBooks;
         let findBook = (book, myBooks) => {
 
             myBooks.find((bookToFind) => bookToFind.id === book.id)
         };
 
-        BooksAPI.search(values.query, 20).then((searchResults) => {
-
-            searchResults.map(book => findBook(book, myBooks) ? book.shelf = findBook(book, myBooks).shelf : book.shelf = 'none');
-            this.setState({searchResults})
-
-        })
+        if (query) {
+            BooksAPI.search(query, 20).then(
+                searchResults => {
+                    if (!searchResults || searchResults.error) {
+                        this.setState({searchResults: []})
+                    } else {
+                        searchResults.map(book => findBook(book, myBooks) ? book.shelf = findBook(book, myBooks).shelf : book.shelf = 'none');
+                        this.setState({searchResults})
+                    }
+                },
+                error => {
+                    this.setState({searchResults: []})
+                })
+        }
+        else {
+            this.setState({searchResults: []})
+        }
     }
 
     render() {
@@ -48,11 +58,12 @@ class SearchBooks extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                    <form onSubmit={this.searchBooks} className='search-books-input-wrapper'>
-                        <input type="text" name="query"
+                    <div className='search-books-input-wrapper'>
+                        <input onChange={this.searchBooks}
+                               type="text" name="query"
                                placeholder="Search by title or author"/>
 
-                    </form>
+                    </div>
                 </div>
                 <div className="search-books-results">
                     <BooksGrid books={this.state.searchResults} onHandleChange={this.props.onHandleChange}/>
