@@ -20,9 +20,9 @@ class SearchBooks extends Component {
 
         const query = e.target.value;
         const myBooks = this.props.myBooks;
-        let findBook = (book, myBooks) => {
+        const findBook = (book, myBooks) => {
 
-            myBooks.find((bookToFind) => bookToFind.id === book.id)
+            return myBooks.find((bookToFind) => bookToFind.id === book.id)
         };
 
         if (query) {
