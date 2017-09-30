@@ -23,11 +23,11 @@ To get started developing right away:
     ├── App.js # This is the root of the app.
     ├── App.test.js # Used for testing. Provided with Create React App.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── Book.js # Single Book component. Used in BookGrid component
-    ├── BookGrid.js # Book component. Used in BookShelf and SearchBooks components
-    ├── BookShelf.js # Book component. Used in ListBooks component
-    ├── ListBooks.js # Book component. Used in App component to show shelves
-    ├── SearchBooks.js # Book component. Used in App component to show search results
+    ├── Book.js # Book component - a single book. Used in BookGrid component
+    ├── BookGrid.js # BookGrid component - a list of books without shelf arrangment. Used in BookShelf and SearchBooks components
+    ├── BookShelf.js # BookShelf component - a shelf with books on it. Used in ListBooks component
+    ├── ListBooks.js # ListBooks component - multiple shelves. Used in App component to show shelves
+    ├── SearchBooks.js # SearchBooks component - search page. Used in App component to show search results
     ├── icons # Images.
     │   ├── add.svg
     │   ├── arrow-back.svg
