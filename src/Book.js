@@ -11,7 +11,7 @@ const Book = (props) => {
                 <div className="book-cover" style={{
                     width: '100%',
                     height: '100%',
-                    backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : ''})`
+                    backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : 'http://via.placeholder.com/128x193?text=No%20Cover'})`
                 }}> </div>
                 <div className="book-shelf-changer">
                     <select value={book.shelf} onChange={(e) => props.onHandleChange(book, e.target.value)}>
