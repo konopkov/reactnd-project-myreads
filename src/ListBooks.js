@@ -7,6 +7,16 @@ class ListBooks extends Component {
     render() {
 
         const books = this.props.books;
+        const shelves = [{
+            title: 'Currently Reading',
+            name: 'currentlyReading'
+        }, {
+            title: 'Want to read',
+            name: 'wantToRead'
+        }, {
+            title: 'Read',
+            name: 'read'
+        }];
 
         return (
             <div className="list-books">
@@ -15,18 +25,12 @@ class ListBooks extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf shelfName='Currently Reading'
-                                   onHandleChange={this.props.onHandleChange}
-                                   books={books.filter((book) => book.shelf === 'currentlyReading')}
-                        />
-                        <BookShelf shelfName='Want to Read'
-                                   onHandleChange={this.props.onHandleChange}
-                                   books={books.filter((book) => book.shelf === 'wantToRead')}
-                        />
-                        <BookShelf shelfName='Read'
-                                   onHandleChange={this.props.onHandleChange}
-                                   books={books.filter((book) => book.shelf === 'read')}
-                        />
+                        {shelves.map((shelf) => (
+                            <BookShelf key={shelf.name}
+                                       shelfTitle={shelf.title}
+                                       books={books.filter((book) => book.shelf === shelf.name)}
+                                       onHandleChange={this.props.onHandleChange}/>
+                        ))}
                     </div>
                 </div>
                 <div className="open-search">
