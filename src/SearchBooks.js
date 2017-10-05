@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {Debounce} from 'react-throttle';
 import * as BooksAPI from './BooksAPI'
 import BooksGrid from "./BooksGrid";
 
@@ -59,9 +60,11 @@ class SearchBooks extends Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                     <div className='search-books-input-wrapper'>
-                        <input onChange={this.searchBooks}
-                               type="text" name="query"
-                               placeholder="Search by title or author"/>
+                        <Debounce time="800" handler="onChange">
+                            <input onChange={this.searchBooks}
+                                   type="text" name="query"
+                                   placeholder="Search by title or author"/>
+                        </Debounce>
 
                     </div>
                 </div>
